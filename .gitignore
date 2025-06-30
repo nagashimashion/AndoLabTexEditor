@@ -1,0 +1,27 @@
+# --------------------------------------------------
+# LaTeX Generated Files
+# --------------------------------------------------
+# The output directory for PDF and all auxiliary files
+/out/
+
+
+# --------------------------------------------------
+# VSCode / Dev Container
+# --------------------------------------------------
+# Local editor settings and cache
+.vscode/
+.devcontainer/.cache/
+
+
+# --------------------------------------------------
+# OS Generated Files
+# --------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db

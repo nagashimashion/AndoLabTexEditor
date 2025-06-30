@@ -1,0 +1,226 @@
+\documentclass[uplatex,a4paper,12pt]{ujreport}
+\usepackage{jgraduate}
+%% 索引作成
+%\usepackage{makeidx}
+% dvipdfmxを使用しない場合はオプションを変更すること
+\usepackage[dvipdfmx]{graphicx}
+% 数字付きリストでラベルを使う
+\usepackage{enumerate}
+% 数学記号など
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% URLをいい感じにする
+\usepackage{url}
+\usepackage{cite}
+
+% フォント周りのおまじない
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[deluxe,jis2004]{otf}% 和文7書体の使用
+\usepackage{pxchfon}
+
+%------------------------------
+% 余白設定
+%------------------------------
+\usepackage[left=27mm,right=27mm,top=45mm,bottom=45mm,%
+ headheight=5mm,headsep=10mm,%
+ footskip=12mm%
+ ]{geometry}
+
+%------------------------------
+% hyperref
+%------------------------------
+% PDF化したときにしおりが作成され，図表へのジャンプも可能となる．
+% 以下は共通
+\usepackage[dvipdfm,
+ bookmarks=true,
+ bookmarksnumbered=true,%
+ bookmarksopen=false,
+ pdfstartview={FitH},%
+ bookmarkstype=toc,%
+ setpagesize=false,%
+ hidelinks,
+]{hyperref}
+\usepackage{pxjahyper}
+
+%----------------------------------------------------------------------
+% 設定
+%----------------------------------------------------------------------
+% 目次の深さはsubsubsectionまで
+\setcounter{tocdepth}{3}
+
+% 基準となる図の幅
+\newlength\figurewidth
+\setlength{\figurewidth}{0.8\textwidth}
+% 縦に並べた図の間の基準となるスペース
+\newlength\figuresep
+\setlength{\figuresep}{0.8\floatsep}
+
+%----------------------------------------------------------------------
+% 文書基本情報
+%----------------------------------------------------------------------
+% タイトル
+\title{Overleaf用の卒論・修論テンプレート}
+
+% 著者
+\author{安藤 崇央}
+\studentid{J2100}
+
+% 所属
+% 卒業論文の場合はこちら
+\university{群馬大学}
+% 情報学部
+\department{情報学部}
+\major{情報学科}
+\program{計算機科学プログラム}
+% \program{データサイエンスプログラム}
+
+% 理工学部
+% \department{理工学部}
+% \major{電子情報理工学科}
+% \major{総合理工学科}
+% \course{情報科学コース}
+
+% 修士論文の場合はこちら
+% \department{大学院理工学府}
+% \major{理工学専攻}
+% \program{電子情報・数理教育プログラム}
+
+% 年度、提出年月（月までを書く）
+\academicyear{令和6年度}
+\date{令和7年1月}
+
+% % 指導教員（卒論用）
+\supervisor{安藤 崇央 准教授}
+
+% 指導教員、副指導教員（修論用）、主査
+% \supervisor{安藤 崇央 准教授}{太田 直哉 教授}
+% \examiner{△△ ▽▽ 教授}
+
+%======================================================================
+% テキスト開始
+%======================================================================
+\begin{document}
+% 表紙はページ番号を出力しない
+\thispagestyle{empty}
+% 表紙
+\maketitle
+
+%----------------------------------------------------------------------
+% 概要
+%----------------------------------------------------------------------
+\begin{abstract}
+概要をここに書く
+\end{abstract}
+
+%----------------------------------------------------------------------
+% 目次
+%----------------------------------------------------------------------
+\tableofcontents
+
+%----------------------------------------------------------------------
+% 本文のページ番号設定
+%----------------------------------------------------------------------
+\setcounter{page}{0}
+\pagenumbering{arabic}
+
+
+%======================================================================
+% 本文ここから
+%======================================================================
+
+\chapter{はじめに}
+GMail\cite{gmail}は、フリーのメールサービスで…
+
+\[
+\left( \frac{1}{2} \right)
+\]
+
+\[
+    \left( (\phi \to \psi) \to \omega \right)
+\]
+
+
+\[
+    \biggl( (\mathit{fuga}) \biggr)
+\]
+
+堀らは、XXシステム\cite{hori-icaiic2020}を考案している
+
+XXシステム\cite{hori-icaiic2020}は2020年に考案されている
+
+ふがふが
+\[
+    x, y \in \mathbb{Z}
+\]
+
+\section{背景}
+ここには…をかく\cite{hori-icaiic2020}
+
+`fugu'
+
+``hoge''
+
+muga
+
+\{~\}
+
+\subsection{hoge}
+
+\section{関連研究}
+
+\begin{align}
+    \mathit{difference} &= \mathrm{hoge} \times \mathrm{fuga} \\
+    \phi &= \psi \wedge \omega
+\end{align}
+
+
+\begin{itemize}
+    \item これこれについて書いておく
+    \item あれについて実装が必要
+    \item 評価はこんなふうにするか
+\end{itemize}
+
+\begin{enumerate}
+    \item 順番のあるものは\verb|enumerate|環境で書く
+    \item これをやったら
+    \item アレをやって
+    \item 次にそれもやる
+\end{enumerate}
+
+\chapter{準備}
+
+\chapter{これこれシステム}
+
+\chapter{評価}
+\section{もげ}
+\subsection{ぬがぬが}
+\section{あいう}
+\subsection{えお}
+
+\chapter{まとめ}
+ほげほげ
+
+
+%======================================================================
+% 謝辞
+%======================================================================
+\acknowledgment
+謝辞をここに書く
+
+%----------------------------------------------------------------------
+% 参考文献
+%----------------------------------------------------------------------
+\bibliographystyle{junsrt}
+\bibliography{ref.bib}
+
+%======================================================================
+% 付録がある場合は、\appendix 以下に書く
+%======================================================================
+\appendix
+\chapter{アンケート}
+
+\chapter{利用したシミュレーションログ}
+
+\end{document}
