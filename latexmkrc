@@ -1,4 +1,4 @@
-$latex = 'uplatex';
+$latex = 'uplatex %O -interaction=nonstopmode -file-line-error %S';
 $bibtex = 'upbibtex';
 $dvipdf = 'dvipdfmx %O -o %D %S';
 $makeindex = 'mendex %O -o %D %S';
