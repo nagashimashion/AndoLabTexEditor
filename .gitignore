@@ -1,9 +1,38 @@
 # --------------------------------------------------
-# LaTeX Generated Files
+# LaTeX Generated Files (Intermediate & Output)
 # --------------------------------------------------
 # The output directory for PDF and all auxiliary files
 /out/
 
+# Core auxiliary files
+*.aux
+*.log
+*.dvi
+*.bbl
+*.blg
+*.brf
+*.fls
+*.ent
+*.toc
+*.lof
+*.lot
+*.out
+
+# latexmk specific files
+*.fdb_latexmk
+*.fls
+
+# SyncTeX (Synchronization file)
+*.synctex.gz
+*.synctex(busy)
+
+# Beamer class specific files (Presentation)
+*.nav
+*.snm
+*.vrb
+
+# PDF (Optional: Remove this line if you want to commit the PDF)
+*.pdf
 
 # --------------------------------------------------
 # VSCode / Dev Container
@@ -11,6 +40,9 @@
 # Local editor settings and cache
 .vscode/
 .devcontainer/.cache/
+
+# LaTeX Workshop specific
+.texpadtmp
 
 
 # --------------------------------------------------
