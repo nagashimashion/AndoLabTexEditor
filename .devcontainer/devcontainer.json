@@ -1,55 +1,100 @@
 // .devcontainer/devcontainer.json
 {
-  // コンテナ名
+  // コンテナの名前（VSCodeの表示に使われます）
   "name": "LaTeX Container",
 
-  // ビルド設定（Dockerfile を参照）
+  // 使用するDockerfileを指定してコンテナをビルドします
   "build": {
     "dockerfile": "Dockerfile"
   },
 
-  // VSCode のカスタマイズ（拡張機能と設定）
+  // VSCode自体のカスタマイズ設定
   "customizations": {
     "vscode": {
+      // このコンテナ内でのみ有効化するVSCode拡張機能
       "extensions": [
         "James-Yu.latex-workshop",
         "seatonjiang.gitmoji-vscode"
       ],
 
+      // このコンテナ内でのみ有効になるVSCodeの設定
       "settings": {
-        // 自動クリーンアップ設定
+        // --------------------------------------------------
+        // ① 自動クリーンアップに関する設定
+        // --------------------------------------------------
+
+        // ビルドが成功した後に、自動で補助ファイルを削除します
         "latex-workshop.latex.autoClean.run": "onBuilt",
+
+        // クリーンアップ方法を「glob」に固定します。
+        // これにより、latexmkのクリーン機能(-c)ではなく、下のリストに基づいたファイル削除が強制されます。
         "latex-workshop.latex.clean.method": "glob",
+
+        // 自動クリーンで削除するファイルの拡張子リスト
         "latex-workshop.latex.clean.fileTypes": [
-          "*.aux", "*.bbl", "*.blg", "*.idx", "*.ind", "*.lof", "*.lot",
-          "*.out", "*.toc", "*.acn", "*.acr", "*.alg", "*.glg", "*.glo",
-          "*.gls", "*.ist", "*.fls", "*.log", "*.fdb_latexmk", "*.snm",
-          "*.nav", "*.dvi", "*.synctex.gz"
+            "*.aux", "*.bbl", "*.blg", "*.idx", "*.ind", "*.lof", "*.lot",
+            "*.out", "*.toc", "*.acn", "*.acr", "*.alg", "*.glg", "*.glo",
+            "*.gls", "*.ist", "*.fls", "*.log", "*.fdb_latexmk", "*.snm",
+            "*.nav", "*.dvi", "*.synctex(busy)"
         ],
 
-        // ビルド／クリーンの出力先とレシピ
+        // --------------------------------------------------
+        // ② ビルドと手動クリーンアップに関する設定
+        // --------------------------------------------------
+        
+        // PDFなどの出力ファイルを保存するディレクトリ 
         "latex-workshop.latex.outDir": "out",
-        "latex-workshop.latex.recipes": [
-          { "name": "uplatexmk (Build)", "tools": [ "uplatexmk" ] },
-          { "name": "Clean All Auxiliary Files (Manual)", "tools": [ "latexmk_clean_full" ] }
-        ],
 
-        // レシピで使うツール定義
-        "latex-workshop.latex.tools": [
+        // VSCodeのUIから選択する「レシピ（操作のまとまり）」を定義します
+        "latex-workshop.latex.recipes": [
+          // [操作1] 通常のビルド用レシピ。自動クリーンはこちらのビルド後に実行されます。
           {
-            "name": "uplatexmk",
-            "command": "latexmk",
-            "args": [ "-synctex=1", "-silent", "-outdir=%OUTDIR%", "-pdfdvi", "%DOC%" ]
+            "name": "uplatexmk (Build)",
+            "tools": [ "uplatexmk" ]
           },
+          // [操作2] 手動で強制的に全補助ファイルを削除したい時に使うレシピ
           {
-            "name": "latexmk_clean_full",
-            "command": "latexmk",
-            "args": [ "-C", "-outdir=%OUTDIR%", "%DOC%" ]
+            "name": "Clean All Auxiliary Files (Manual)",
+            "tools": [ "latexmk_clean_full" ]
           }
         ],
 
-        // その他
+        // レシピから呼び出される個別の「ツール（コマンド）」を定義します
+        "latex-workshop.latex.tools": [
+          // ビルド用のツール本体
+          {
+            "name": "uplatexmk",
+            "command": "latexmk",
+            "args": [
+              "-synctex=1",
+              // "-silent", 
+              "-outdir=%OUTDIR%",
+              "-pdfdvi", 
+              "%DOC%"
+            ]
+          },
+          // 手動クリーン用の強力なツール本体（PDF以外を全て削除）
+          {
+            "name": "latexmk_clean_full",
+            "command": "latexmk",
+            "args": [
+              "-C", // -c より強力なクリーンアップ（大文字のC）
+              "-outdir=%OUTDIR%",
+              "%DOC%"
+            ]
+          }
+        ],
+
+        // --------------------------------------------------
+        // ③ その他の便利な設定
+        // --------------------------------------------------
+
+        // LaTeXのパッケージ名などの補完機能を有効化
         "latex-workshop.intellisense.package.enabled": true,
+        
+        "latex-workshop.formatting.latex": "latexindent",
+
+        // エディタの書式設定
         "[tex]":      { "editor.tabSize": 2 },
         "[latex]":    { "editor.tabSize": 2 },
         "[bibtex]":   { "editor.tabSize": 2 }
